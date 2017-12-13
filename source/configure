@@ -7093,11 +7093,23 @@ fi
 
 if test x$ac_cv_func_strtod_l = xyes
 then
-     CONFIG_CPPFLAGS="${CONFIG_CPPFLAGS} -DU_HAVE_STRTOD_L=1"
-     U_HAVE_STRTOD_L=1
+    U_HAVE_STRTOD_L=1
+    ac_fn_c_check_header_mongrel "$LINENO" "xlocale.h" "ac_cv_header_xlocale_h" "$ac_includes_default"
+if test "x$ac_cv_header_xlocale_h" = xyes; then :
+
+fi
+
+
+    if test "$ac_cv_header_xlocale_h" = yes; then
+      U_HAVE_XLOCALE_H=1
+      CONFIG_CPPFLAGS="${CONFIG_CPPFLAGS} -DU_HAVE_STRTOD_L=1 -DU_HAVE_XLOCALE_H=1"
+    else
+      U_HAVE_XLOCALE_H=0
+      CONFIG_CPPFLAGS="${CONFIG_CPPFLAGS} -DU_HAVE_STRTOD_L=1 -DU_HAVE_XLOCALE_H=0"
+    fi
 else
-     CONFIG_CPPFLAGS="${CONFIG_CPPFLAGS} -DU_HAVE_STRTOD_L=0"
-     U_HAVE_STRTOD_L=0
+    CONFIG_CPPFLAGS="${CONFIG_CPPFLAGS} -DU_HAVE_STRTOD_L=0"
+    U_HAVE_STRTOD_L=0
 fi
 
 
